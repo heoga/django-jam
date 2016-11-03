@@ -10,8 +10,8 @@ class Profile(models.Model):
     class Meta:
         app_label = 'jam'
 
-    def profile_found(self):
-        return 'Yes'
+    def theme(self):
+        return 'cosmo'
 
 
 @receiver(post_save, sender=User)

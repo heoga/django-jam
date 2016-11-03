@@ -1,0 +1,1 @@
+<link rel="stylesheet" href="http://bootswatch.com/{% if request.user.is_authenticated %}{{request.user.profile.theme}}{% else %}slate{% endif %}/bootstrap.min.css" type="text/css">

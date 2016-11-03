@@ -7,6 +7,16 @@ from django.db import migrations, models
 import django.db.models.deletion
 
 
+def create_profiles_for_existing_users(apps, scheme_editor):
+    User = apps.get_model('auth', 'User')
+    Profile = apps.get_model('jam', 'Profile')
+    for instance in User.objects.all():
+        if hasattr(instance, 'profile'):
+            continue
+        profile = Profile.objects.create(user=instance)
+        profile.save
+
+
 class Migration(migrations.Migration):
 
     initial = True
@@ -29,4 +39,5 @@ class Migration(migrations.Migration):
                 )),
             ],
         ),
+        migrations.RunPython(create_profiles_for_existing_users),
     ]
