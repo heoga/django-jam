@@ -6,12 +6,10 @@ from django.dispatch import receiver
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    theme = models.CharField(max_length=16, default='cosmo')
 
     class Meta:
         app_label = 'jam'
-
-    def theme(self):
-        return 'cosmo'
 
 
 @receiver(post_save, sender=User)
