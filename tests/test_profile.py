@@ -15,7 +15,8 @@ def test_profile_creation():
     assert profile.id == 1
     assert Profile.objects.get(id=1)
     # Check the default profile is set.
-    assert profile.theme == 'cosmo'
+    assert profile.theme == '1'
+    assert profile.theme_name() == 'Cerulean'
     # Now check when the user is deleted, the profile goes as well.
     user.delete()
     with pytest.raises(Profile.DoesNotExist):
