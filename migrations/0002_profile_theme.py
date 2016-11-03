@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='profile',
             name='theme',
-            field=models.CharField(default='cosmo', max_length=16),
+            field=models.CharField(default='1', max_length=16),
         ),
     ]

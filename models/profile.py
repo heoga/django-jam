@@ -5,11 +5,22 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
+    THEMES = (
+        ('1', 'Cosmo'),
+        ('2', 'Darkly'),
+        ('3', 'Superhero'),
+    )
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    theme = models.CharField(max_length=16, default='cosmo')
+    theme = models.CharField(max_length=1, default=THEMES[0], choices=THEMES)
 
     class Meta:
         app_label = 'jam'
+
+    def theme_name(self):
+        for key, name in self.THEMES:
+            if key == self.theme:
+                return name
 
 
 @receiver(post_save, sender=User)
