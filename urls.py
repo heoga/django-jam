@@ -15,6 +15,6 @@ router.register(r'profiles', ProfileViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^$', DashboardView.as_view(), name='dashboard'),
-    url(r'^api/', include(router.urls)),
+    url(r'^api/', include(router.urls), name='rootapi'),
     url(r'^api-auth/', include('rest_framework.urls'))
 ]
