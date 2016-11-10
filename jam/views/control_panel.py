@@ -2,7 +2,6 @@ from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 
@@ -19,7 +18,6 @@ class OldControlPanelView(LoginRequiredMixin, TemplateView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        print(self.request.user.email)
         kwargs['initial'] = {
             'theme': self.request.user.profile.theme,
             'first_name': self.request.user.first_name,
