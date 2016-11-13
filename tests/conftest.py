@@ -4,6 +4,14 @@ import sys
 
 def pytest_configure():
     sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+    # Setup.py doesn't play nice with the paths on Windows adding both normal
+    # and lower case versions.  This means that when Django tries to import it
+    # sees 'two' valid paths and exits.  This should work around that.
+    lower_case = os.path.abspath(__file__).lower()
+    if (
+        lower_case != os.path.abspath(__file__)
+    ) and os.path.exists(lower_case):
+        sys.path = [a.lower() for a in sys.path]
     from django.conf import settings
 
     MIDDLEWARE = (

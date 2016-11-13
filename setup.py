@@ -73,7 +73,19 @@ setup(
     author_email='karlodie@gmail.com',
     packages=get_packages('jam'),
     package_data=get_package_data('jam'),
-    install_requires=[],
+    install_requires=[
+        'django',
+        'django-bootstrap3',
+        'djangorestframework',
+        'Markdown',
+    ],
+    setup_requires=['pytest-runner'],
+    tests_require=[
+        'pytest-django',
+        'pytest-cov',
+        'pytest-flake8',
+        'pytest-isort',
+    ],
     zip_safe=False,
     classifiers=[
         'Environment :: Web Environment',
