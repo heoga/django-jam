@@ -60,7 +60,7 @@ def get_package_data(package):
     return {package: filepaths}
 
 
-version = "alpha"
+version = "0.0.1"
 
 setup(
     name='jam',
