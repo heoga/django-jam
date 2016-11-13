@@ -68,7 +68,7 @@ setup(
     url='http://packages.python.org/an_example_pypi_project',
     license='BSD',
     description='dJango Agile livecycle Management',
-    long_description='Long Description',  # read_md('README.md'),
+    long_description=read_md('README.md'),
     author='Karl Odie',
     author_email='karlodie@gmail.com',
     packages=get_packages('jam'),
