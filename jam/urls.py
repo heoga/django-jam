@@ -1,11 +1,11 @@
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from rest_framework import routers
 
-from .serializers.user import UserViewSet
 from .serializers.profile import ProfileViewSet
+from .serializers.user import UserViewSet
 
-from .views.dashboard import DashboardView
 from .views.control_panel import ControlPanelView
+from .views.dashboard import DashboardView
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()

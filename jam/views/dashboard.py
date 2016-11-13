@@ -1,6 +1,6 @@
-from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
+from django.views.generic.base import TemplateView
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):

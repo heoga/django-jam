@@ -1,7 +1,7 @@
+import pytest
+
 from django.contrib.auth.models import User
 from jam.models import Profile
-
-import pytest
 
 
 @pytest.mark.django_db
