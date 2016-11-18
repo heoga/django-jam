@@ -2,7 +2,20 @@ import os
 import sys
 
 
-def pytest_configure():
+def find_phantomjs():
+    phantom = os.environ.get('PHANTOMJS')
+    if phantom:
+        return phantom
+    path_options = os.environ.get('PATH', '').split(os.pathsep)
+    for path in path_options:
+        for name in ('phantomjs', 'phantomjs.exe'):
+            candidate = os.path.join(path, name)
+            if os.path.exists(candidate):
+                return candidate
+
+
+def pytest_configure(config):
+    os.system('coverage erase')
     sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
     # Setup.py doesn't play nice with the paths on Windows adding both normal
     # and lower case versions.  This means that when Django tries to import it
@@ -81,3 +94,11 @@ def pytest_configure():
         django.setup()
     except AttributeError:
         pass
+    # Now configure PhantomJS
+    if config.option.driver is None:
+        config.option.driver = 'PhantomJS'
+        config.option.driver_path = find_phantomjs()
+
+
+def pytest_unconfigure():
+    os.system('coverage html')
