@@ -12,8 +12,8 @@ def test_profile_creation():
     )
     assert user.profile
     profile = user.profile
-    assert profile.id == 1
-    assert Profile.objects.get(id=1)
+    assert Profile.objects.count() == 1
+    assert Profile.objects.get(id=profile.id)
     # Check the default profile is set.
     assert profile.theme == '1'
     assert profile.theme_name() == 'Cerulean'

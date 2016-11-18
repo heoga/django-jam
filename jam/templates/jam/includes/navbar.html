@@ -16,18 +16,18 @@
             <li><a href="{% url 'api-root' %}">API</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            {% if request.user.is_authenticated %}
+            {% if view.request.user.is_authenticated %}
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{request.user.get_full_name}} <span class="caret"></span></a>
+                  <a href="#" id="user_menu" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{view.request.user.get_full_name}} <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="{% url 'control_panel' %}">Control Panel</a></li>
+                    <li><a id="control_panel" href="{% url 'control_panel' %}">Control Panel</a></li>
                     <li class="divider"></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
                   </ul>
                 </li>
             {% else %}
                 <li>
-                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'login' %}">Login {{request}}</a>
                 </li>
             {% endif %}
           </ul>

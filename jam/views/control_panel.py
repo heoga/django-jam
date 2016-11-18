@@ -24,13 +24,13 @@ class ControlPanelView(LoginRequiredMixin, View):
         return render(request, self.template_name, {
             'user_form': user_form,
             'profile_form': profile_form,
+            'view': self,
         })
 
     def post(self, request, *args, **kwargs):
         user_form = UserForm(request.POST)
         profile_form = ProfileForm(request.POST)
         if user_form.is_valid() and profile_form.is_valid():
-            # <process form cleaned data>
             for key, value in user_form.cleaned_data.items():
                 setattr(self.request.user, key, value)
             for key, value in profile_form.cleaned_data.items():
