@@ -1,4 +1,5 @@
 # JAM - Agile Lifecycle Management for Django
+[![build-status-image]][travis]
 The goal of this project is to provide an open-source tool to facilitate the
 managment of agile projects in large organisations.
 
@@ -27,3 +28,6 @@ INSTALLED_APPS = (
 ```
 Since jam overrides the view of rest_framework API it must appear above the
 rest_framework in the list.
+
+[build-status-image]: https://secure.travis-ci.org/heoga/django-jam.svg?branch=master
+[travis]: http://travis-ci.org/heoga/django-jam?branch=master
