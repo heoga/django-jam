@@ -1,6 +1,7 @@
 # Django-Nimble
 [![build-status-image]][travis]
 [![coverage-status-image]][codecov]
+[![pypi-version]][pypi]
 
 Jack be nimble, jack be quick.
 
@@ -38,3 +39,5 @@ rest_framework in the list.
 [travis]: http://travis-ci.org/heoga/django-nimble?branch=master
 [coverage-status-image]: https://codecov.io/gh/heoga/django-nimble/branch/master/graph/badge.svg
 [codecov]: https://codecov.io/gh/heoga/django-nimble?branch=master
+[pypi-version]: https://img.shields.io/pypi/v/django-nimble.svg
+[pypi]: https://pypi.python.org/pypi/django-nimble

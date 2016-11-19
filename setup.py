@@ -10,7 +10,7 @@ try:
     from pypandoc import convert
 
     def read_md(f):
-        return convert(f, 'rst')
+        return convert(f, 'rst').replace('\r', '')
 except ImportError:
     print(
         "warning: pypandoc module not found, could not convert Markdown to RST"
@@ -60,12 +60,12 @@ def get_package_data(package):
     return {package: filepaths}
 
 
-version = "0.0.1"
+version = "0.0.1.post2"
 
 setup(
     name='django-nimble',
     version=version,
-    url='http://packages.python.org/an_example_pypi_project',
+    url='https://github.com/heoga/django-nimble',
     license='BSD',
     description='Nimble Project Management',
     long_description=read_md('README.md'),
