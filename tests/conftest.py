@@ -98,6 +98,11 @@ def pytest_configure(config):
     if config.option.driver is None:
         config.option.driver = 'PhantomJS'
         config.option.driver_path = find_phantomjs()
+    # Clear flake8 & isort caches.
+    for package in ('flake8', 'isort'):
+        mtimes = os.path.join('.cache', 'v', package, 'mtimes')
+        if os.path.exists(mtimes):
+            os.remove(mtimes)
 
 
 def pytest_unconfigure():

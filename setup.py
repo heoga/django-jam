@@ -82,11 +82,12 @@ setup(
     setup_requires=['pytest-runner>=2.9'],
     tests_require=[
         'pytest>=3.0.4',
-        'pytest-django',
-        'pytest-cov',
-        'pytest-flake8',
-        'pytest-isort',
-        'pytest-selenium',
+        'pytest-base-url>=1.2',
+        'pytest-django>=3.0',
+        'pytest-cov>=2.4',
+        'pytest-flake8>=0.8.1',
+        'pytest-isort>=0.1',
+        'pytest-selenium>=1.6',
     ],
     zip_safe=False,
     classifiers=[
