@@ -1,3 +1,5 @@
+pytest>=3.0.4
+pytest-runner>=2.9
 pytest-django
 pytest-cov
 pytest-flake8

@@ -3,7 +3,7 @@ python:
   - "3.5"
 # command to install dependencies
 install:
-  - pip install -r requirements/install.txt
-  - pip install -r requirements/testing.txt
+  - pip install -r requirements/install.txt --upgrade
+  - pip install -r requirements/testing.txt --upgrade
 # command to run tests
 script: python setup.py test
