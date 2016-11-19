@@ -79,8 +79,9 @@ setup(
         'djangorestframework',
         'Markdown',
     ],
-    setup_requires=['pytest-runner'],
+    setup_requires=['pytest-runner>=2.9'],
     tests_require=[
+        'pytest>=3.0.4',
         'pytest-django',
         'pytest-cov',
         'pytest-flake8',
