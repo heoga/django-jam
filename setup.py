@@ -71,8 +71,8 @@ setup(
     long_description=read_md('README.md'),
     author='Karl Odie',
     author_email='karlodie@gmail.com',
-    packages=get_packages('jam'),
-    package_data=get_package_data('jam'),
+    packages=get_packages('nimble'),
+    package_data=get_package_data('nimble'),
     install_requires=[
         'django',
         'django-bootstrap3',

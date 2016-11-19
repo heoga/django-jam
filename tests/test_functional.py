@@ -6,8 +6,8 @@ def test_change_theme(selenium, live_server):
         username="fflint", email="fred@bedrock.com", password="wilma",
         first_name="Fred", last_name="Flintstone"
     )
-    # Fred opens his JAM link.
-    selenium.get(live_server.url + '/jam/')
+    # Fred opens his Nimble link.
+    selenium.get(live_server.url + '/nimble/')
     # His browser opens full screen.
     selenium.set_window_size(1920, 1080)
     # He enters his username.

@@ -9,7 +9,7 @@ from django.db import migrations, models
 
 def create_profiles_for_existing_users(apps, scheme_editor):
     User = apps.get_model('auth', 'User')
-    Profile = apps.get_model('jam', 'Profile')
+    Profile = apps.get_model('nimble', 'Profile')
     for instance in User.objects.all():
         if hasattr(instance, 'profile'):
             continue

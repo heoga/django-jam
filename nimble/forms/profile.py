@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from jam.models.profile import Profile
+from nimble.models.profile import Profile
 
 
 class ProfileForm(ModelForm):

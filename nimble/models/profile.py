@@ -30,7 +30,7 @@ class Profile(models.Model):
     )
 
     class Meta:
-        app_label = 'jam'
+        app_label = 'nimble'
 
     def theme_name(self):
         for key, name in self.THEMES:

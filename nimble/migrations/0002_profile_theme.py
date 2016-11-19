@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('jam', '0001_initial'),
+        ('nimble', '0001_initial'),
     ]
 
     operations = [

@@ -1,6 +1,6 @@
 from rest_framework import serializers, viewsets
 
-from jam.models.profile import Profile
+from nimble.models.profile import Profile
 
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):

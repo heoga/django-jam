@@ -4,13 +4,13 @@ from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
 from django.views import View
 
-from jam.forms.profile import ProfileForm
-from jam.forms.user import UserForm
+from nimble.forms.profile import ProfileForm
+from nimble.forms.user import UserForm
 
 
 class ControlPanelView(LoginRequiredMixin, View):
     login_url = reverse_lazy('login')
-    template_name = "jam/control_panel.html"
+    template_name = "nimble/control_panel.html"
 
     def get(self, request, *args, **kwargs):
         user_form = UserForm(initial={

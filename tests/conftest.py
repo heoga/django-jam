@@ -64,7 +64,7 @@ def pytest_configure(config):
             'django.contrib.sessions',
             'django.contrib.sites',
             'django.contrib.staticfiles',
-            'jam.apps.JamConfig',
+            'nimble.apps.NimbleConfig',
             'rest_framework',
             'bootstrap3',
             'tests',

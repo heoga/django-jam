@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 
 import pytest
 
-from jam.models import Profile
+from nimble.models import Profile
 
 
 @pytest.mark.django_db

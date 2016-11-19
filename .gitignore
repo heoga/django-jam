@@ -6,3 +6,5 @@ __pycache__
 coverage_html_report
 ghostdriver.log
 geckodriver.log
+dist
+build
