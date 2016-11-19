@@ -1,5 +1,6 @@
 # JAM - Agile Lifecycle Management for Django
 [![build-status-image]][travis]
+
 The goal of this project is to provide an open-source tool to facilitate the
 managment of agile projects in large organisations.
 
