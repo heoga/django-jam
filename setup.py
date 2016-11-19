@@ -63,11 +63,11 @@ def get_package_data(package):
 version = "0.0.1"
 
 setup(
-    name='jam',
+    name='django-nimble',
     version=version,
     url='http://packages.python.org/an_example_pypi_project',
     license='BSD',
-    description='dJango Agile livecycle Management',
+    description='Nimble Project Management',
     long_description=read_md('README.md'),
     author='Karl Odie',
     author_email='karlodie@gmail.com',
