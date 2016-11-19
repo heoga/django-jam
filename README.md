@@ -1,5 +1,6 @@
 # JAM - Agile Lifecycle Management for Django
 [![build-status-image]][travis]
+[![coverage-status-image]][codecov]
 
 The goal of this project is to provide an open-source tool to facilitate the
 managment of agile projects in large organisations.
@@ -32,3 +33,5 @@ rest_framework in the list.
 
 [build-status-image]: https://secure.travis-ci.org/heoga/django-jam.svg?branch=master
 [travis]: http://travis-ci.org/heoga/django-jam?branch=master
+[coverage-status-image]: https://codecov.io/gh/heoga/django-jam/branch/master/graph/badge.svg
+[codecov]: https://codecov.io/gh/heoga/django-jam?branch=master
