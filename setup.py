@@ -78,6 +78,7 @@ setup(
         'django-bootstrap3',
         'djangorestframework',
         'Markdown',
+        'django-polymorphic',
     ],
     setup_requires=['pytest-runner>=2.9'],
     tests_require=[
