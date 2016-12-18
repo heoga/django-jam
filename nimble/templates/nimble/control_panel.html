@@ -6,9 +6,7 @@
     {% bootstrap_form user_form %}
     {% bootstrap_form profile_form %}
     {% buttons %}
-        <button name="submit" type="submit" class="btn btn-primary">
-            {% bootstrap_icon "star" %} Submit
-        </button>
+        {% include "nimble/includes/submit.html" %}
     {% endbuttons %}
 </form>
 {% endblock %}

@@ -3,12 +3,14 @@ import time
 
 from django.contrib.auth.models import User
 
+from selenium.webdriver.common.keys import Keys
+
 from nimble.models.debt import Debt
 from nimble.models.feature import Feature
 
 
 def wait_for_firefox(selenium):
-    pause = int(os.environ.get('FIREFOX_PAUSE', 1))
+    pause = int(os.environ.get('FIREFOX_PAUSE', 5))
     if hasattr(selenium, 'firefox_profile'):
         time.sleep(pause)
 
@@ -84,11 +86,12 @@ def test_view_stories(selenium, live_server):
     fred = create_fred()
     debt = Debt.objects.create(author=fred, title='Fix bad code style')
     feature = Feature.objects.create(author=fred, title='User can pick theme')
-    # Fred opens his Nimble link.
+    # Fred opens his Nimble shortcut for stories.
     selenium.get(live_server.url + '/nimble/stories/')
     # His browser opens full screen.
     selenium.set_window_size(1920, 1080)
     login(selenium, 'fflint', 'wilma')
+    # He scans the list of stories presented.
     table = selenium.find_element_by_id('stories_table')
     body = table.find_element_by_tag_name('tbody')
     rows = body.find_elements_by_tag_name('tr')
@@ -98,3 +101,24 @@ def test_view_stories(selenium, live_server):
     assert feature.name() in rows[1].text
     assert feature.title in rows[1].text
     assert feature.author.get_full_name() in rows[1].text
+    # Fred finds the feature story and clicks the link.
+    link = rows[1].find_element_by_tag_name('a')
+    link.click()
+    wait_for_firefox(selenium)
+    # He corrects the form.
+    title = selenium.find_element_by_name('title')
+    for i in range(0, 19):
+        title.send_keys(Keys.BACKSPACE)
+    title.send_keys('User can pick from a list of themes')
+    wait_for_firefox(selenium)
+    button = selenium.find_element_by_name('submit')
+    button.click()
+    wait_for_firefox(selenium)
+    # Return back to the story list.
+    selenium.get(live_server.url + '/nimble/stories/')
+    wait_for_firefox(selenium)
+    # Fred sees the title has changed.
+    table = selenium.find_element_by_id('stories_table')
+    body = table.find_element_by_tag_name('tbody')
+    rows = body.find_elements_by_tag_name('tr')
+    assert 'User can pick from a list of themes' in rows[1].text

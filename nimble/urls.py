@@ -1,13 +1,14 @@
 from django.conf.urls import include, url
+
 from rest_framework import routers
 
 from .serializers.debt import DebtViewSet
 from .serializers.feature import FeatureViewSet
 from .serializers.profile import ProfileViewSet
 from .serializers.user import UserViewSet
-
 from .views.control_panel import ControlPanelView
 from .views.dashboard import DashboardView
+from .views.story_detail import StoryDetail
 from .views.story_list import StoryList
 
 # Routers provide an easy way of automatically determining the URL conf.
@@ -25,4 +26,8 @@ urlpatterns = [
     url(r'^api/', include(router.urls), name='rootapi'),
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^stories/$', StoryList.as_view()),
+    url(
+        r'^(?P<ident>D|F)(?P<pk>[0-9]+)/$', StoryDetail.as_view(),
+        name='story_detail'
+    ),
 ]
