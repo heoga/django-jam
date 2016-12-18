@@ -78,6 +78,7 @@ setup(
         'django-bootstrap3',
         'djangorestframework',
         'Markdown',
+        'django-polymorphic',
     ],
     setup_requires=['pytest-runner>=2.9'],
     tests_require=[
@@ -88,6 +89,8 @@ setup(
         'pytest-flake8>=0.8.1',
         'pytest-isort>=0.1',
         'pytest-selenium>=1.6',
+        'pytest-mock',
+        'factory_boy',
     ],
     zip_safe=False,
     classifiers=[

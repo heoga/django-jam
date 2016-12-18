@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 <html>
     <head>
-        <title>Base Page</title>
+        <title>{% block title %}Base Page{% endblock %}</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         {% bootstrap_css  %}
         {% include "nimble/includes/style.html" %}

@@ -59,6 +59,7 @@ def pytest_configure(config):
         MIDDLEWARE=MIDDLEWARE,
         MIDDLEWARE_CLASSES=MIDDLEWARE,
         INSTALLED_APPS=(
+            'polymorphic',
             'django.contrib.auth',
             'django.contrib.contenttypes',
             'django.contrib.sessions',

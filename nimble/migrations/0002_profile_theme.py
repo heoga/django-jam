@@ -15,6 +15,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='profile',
             name='theme',
-            field=models.CharField(default='1', max_length=2),
+            field=models.CharField(choices=[
+                ('1', 'Cerulean'), ('2', 'Cosmo'), ('3', 'Cyborg'),
+                ('4', 'Darkly'), ('5', 'Flatly'), ('6', 'Journal'),
+                ('7', 'Lumen'), ('8', 'Paper'), ('9', 'Readable'),
+                ('10', 'Sandstone'), ('11', 'Simplex'), ('12', 'Slate'),
+                ('13', 'Spacelab'), ('14', 'Superhero'), ('15', 'United'),
+                ('16', 'Yeti')
+            ], default='1', max_length=2),
         ),
     ]
