@@ -60,7 +60,7 @@ def get_package_data(package):
     return {package: filepaths}
 
 
-version = "0.0.1.post2"
+version = "0.0.2"
 
 setup(
     name='django-nimble',
