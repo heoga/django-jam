@@ -8,6 +8,7 @@ from .serializers.user import UserViewSet
 
 from .views.control_panel import ControlPanelView
 from .views.dashboard import DashboardView
+from .views.story_list import StoryList
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
@@ -22,5 +23,6 @@ urlpatterns = [
     url(r'^$', DashboardView.as_view(), name='dashboard'),
     url(r'^control_panel/$', ControlPanelView.as_view(), name='control_panel'),
     url(r'^api/', include(router.urls), name='rootapi'),
-    url(r'^api-auth/', include('rest_framework.urls'))
+    url(r'^api-auth/', include('rest_framework.urls')),
+    url(r'^stories/$', StoryList.as_view()),
 ]
