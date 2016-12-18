@@ -43,7 +43,7 @@ class StoryPost(SingleObjectMixin, FormView):
     reverse_url = 'story_detail'
 
     def post(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
+        if not request.user.is_authenticated:  # pragma: no cover
             return HttpResponseForbidden()
         self.object = self.get_object()
         self.form_class = form_mapping[type(self.object)]

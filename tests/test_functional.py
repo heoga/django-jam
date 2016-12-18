@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 from selenium.webdriver.common.keys import Keys
 
+from nimble.forms.feature import FeatureForm
+from nimble.forms.profile import ProfileForm
 from nimble.models.debt import Debt
 from nimble.models.feature import Feature
 
@@ -15,7 +17,7 @@ def wait_for_firefox(selenium):
         time.sleep(pause)
 
 
-def test_change_theme(selenium, live_server):
+def test_change_theme(selenium, live_server, mocker):
     User.objects.create_user(
         username="fflint", email="fred@bedrock.com", password="wilma",
         first_name="Fred", last_name="Flintstone"
@@ -56,6 +58,22 @@ def test_change_theme(selenium, live_server):
     button.click()
     wait_for_firefox(selenium)
     # And is happy to see the theme change.
+    css_links = selenium.find_elements_by_tag_name('link')
+    assert any([
+        'superhero' in d for d in [c.get_attribute('href') for c in css_links]
+    ])
+    # He attempts to change it to Sandstone, but somehow manages to sender
+    # corrupt data.
+    mocker.patch.object(ProfileForm, 'is_valid', return_value=False)
+    theme = selenium.find_element_by_id('id_theme')
+    for option in theme.find_elements_by_tag_name('option'):
+        if option.text == 'Sandstone':
+            option.click()
+            break
+    button = selenium.find_element_by_name('submit')
+    button.click()
+    wait_for_firefox(selenium)
+    # The server ignores the corrupt data and leaves the theme as superhero.
     css_links = selenium.find_elements_by_tag_name('link')
     assert any([
         'superhero' in d for d in [c.get_attribute('href') for c in css_links]
@@ -133,3 +151,33 @@ def test_view_stories(selenium, live_server):
     # He confirms that the link has forwarded him to the API.
     assert 'Feature Instance' in selenium.title
     assert 'Django REST framework' in selenium.title
+
+
+def test_bad_idents(selenium, live_server, mocker):
+    fred = create_fred()
+    feature = Feature.objects.create(author=fred, title='User can pick theme')
+    # Fred opens his Nimble shortcut for stories.
+    selenium.get(live_server.url + '/nimble/')
+    # His browser opens full screen.
+    selenium.set_window_size(1920, 1080)
+    login(selenium, 'fflint', 'wilma')
+    # Attempt to access feature via Debt ID.
+    selenium.get(live_server.url + '/nimble/D{}'.format(feature.pk))
+    assert 'Not Found' in selenium.page_source
+    selenium.get(live_server.url + '/nimble/F{}'.format(feature.pk))
+    wait_for_firefox(selenium)
+    mocker.patch.object(FeatureForm, 'is_valid', return_value=False)
+    title = selenium.find_element_by_name('title')
+    for i in range(0, 19):
+        title.send_keys(Keys.BACKSPACE)
+    title.send_keys('User can pick from a list of themes')
+    wait_for_firefox(selenium)
+    button = selenium.find_element_by_name('submit')
+    button.click()
+    wait_for_firefox(selenium)
+    # The form was repopulated with the invalid content.
+    time.sleep(20)
+    title2 = selenium.find_element_by_name('title')
+    assert 'User can pick from a list of themes' in title2.get_attribute(
+        'value'
+    )
