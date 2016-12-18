@@ -122,3 +122,14 @@ def test_view_stories(selenium, live_server):
     body = table.find_element_by_tag_name('tbody')
     rows = body.find_elements_by_tag_name('tr')
     assert 'User can pick from a list of themes' in rows[1].text
+    # Fred goes back into the feature.
+    link = rows[1].find_element_by_tag_name('a')
+    link.click()
+    wait_for_firefox(selenium)
+    # And clicks the API link.
+    api_link = selenium.find_element_by_name('API')
+    api_link.click()
+    wait_for_firefox(selenium)
+    # He confirms that the link has forwarded him to the API.
+    assert 'Feature Instance' in selenium.title
+    assert 'Django REST framework' in selenium.title

@@ -17,6 +17,7 @@ router.register(r'users', UserViewSet)
 router.register(r'profiles', ProfileViewSet)
 router.register(r'debts', DebtViewSet)
 router.register(r'features', FeatureViewSet)
+print(router.urls)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
