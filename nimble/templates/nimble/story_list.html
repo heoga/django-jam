@@ -4,8 +4,13 @@
 {% block content %}
     <h2>Stories</h2>
     <table class="table" id="stories_table">
-        {% for story in object_list %}
-            <tr id="{{ story.name }}_row"><td>{{ story.name }}</td><td>{{ story.title }}</td><td>{{ story.author.get_full_name }}</td></tr>
-        {% endfor %}
+        <thead>
+            <tr id="header"><td>ID</td><td>Title</td><td>Author</td></tr>
+        </thead>
+        <tbody>
+            {% for story in object_list %}
+                <tr id="{{ story.name }}_row"><td>{{ story.name }}</td><td>{{ story.title }}</td><td>{{ story.author.get_full_name }}</td></tr>
+            {% endfor %}
+        </tbody>
     </table>
 {% endblock %}

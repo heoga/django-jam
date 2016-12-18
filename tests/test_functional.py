@@ -90,7 +90,8 @@ def test_view_stories(selenium, live_server):
     selenium.set_window_size(1920, 1080)
     login(selenium, 'fflint', 'wilma')
     table = selenium.find_element_by_id('stories_table')
-    rows = table.find_elements_by_tag_name('tr')
+    body = table.find_element_by_tag_name('tbody')
+    rows = body.find_elements_by_tag_name('tr')
     assert debt.name() in rows[0].text
     assert debt.title in rows[0].text
     assert debt.author.get_full_name() in rows[0].text
