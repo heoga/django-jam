@@ -20,4 +20,4 @@ def test_polymorphic_story_relations():
     # Get the stories created by this user.
     stories = Story.objects.filter(author__username='testuser')
     assert list(stories) == [feature, debt]
-    assert [a.name() for a in stories] == ['F00001', 'D00002']
+    assert [a.name() for a in stories] == [feature.name(), debt.name()]
