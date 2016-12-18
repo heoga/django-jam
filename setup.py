@@ -89,6 +89,7 @@ setup(
         'pytest-flake8>=0.8.1',
         'pytest-isort>=0.1',
         'pytest-selenium>=1.6',
+        'factory_boy'
     ],
     zip_safe=False,
     classifiers=[
