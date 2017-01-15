@@ -1,6 +1,9 @@
+import reversion
+
 from .story import Story
 
 
+@reversion.register(follow=['story_ptr'])
 class Debt(Story):
     ident = 'D'
     typename = 'Debt'

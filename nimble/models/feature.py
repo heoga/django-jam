@@ -1,6 +1,9 @@
+import reversion
+
 from .story import Story
 
 
+@reversion.register(follow=['story_ptr'])
 class Feature(Story):
     ident = 'F'
     typename = 'Feature'

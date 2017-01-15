@@ -1,10 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+import reversion
 from polymorphic.models import PolymorphicModel
 from markdownx.models import MarkdownxField
 
 
+@reversion.register()
 class Story(PolymorphicModel):
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)

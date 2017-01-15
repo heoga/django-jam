@@ -80,6 +80,7 @@ setup(
         'Markdown',
         'django-polymorphic',
         'django-markdownx>=1.7',
+        'django-reversion',
     ],
     setup_requires=['pytest-runner>=2.9'],
     tests_require=[

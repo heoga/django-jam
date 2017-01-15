@@ -69,6 +69,7 @@ def pytest_configure(config):
             'rest_framework',
             'bootstrap3',
             'markdownx',
+            'reversion',
             'tests',
         ),
         PASSWORD_HASHERS=(
