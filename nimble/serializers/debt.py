@@ -13,7 +13,7 @@ class DebtSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Debt
-        fields = ('url', 'author', 'title')
+        fields = Debt.api_keys()
 
     def validate_author(self, value):
         """

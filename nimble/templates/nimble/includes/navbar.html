@@ -13,13 +13,22 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'stories' %}">Stories</a></li>
+            <li class="dropdown">
+                <a href="#" id="story_menu" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    Stories <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    {% include "nimble/includes/navbar_stories.html" %}
+                </ul>
+            </li>
             <li><a href="{% url 'api-root' %}">API</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if view.request.user.is_authenticated %}
                 <li class="dropdown">
-                  <a href="#" id="user_menu" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{view.request.user.get_full_name}} <span class="caret"></span></a>
+                  <a href="#" id="user_menu" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                      {{view.request.user.get_full_name}} <span class="caret"></span>
+                  </a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a id="control_panel" href="{% url 'control_panel' %}">Control Panel</a></li>
                     <li class="divider"></li>

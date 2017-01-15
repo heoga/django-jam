@@ -1,4 +1,5 @@
 import os
+import re
 import time
 
 from django.contrib.auth.models import User
@@ -156,6 +157,37 @@ def test_view_stories(selenium, live_server):
     # He confirms that the link has forwarded him to the API.
     assert 'Feature Instance' in selenium.title
     assert 'Django REST framework' in selenium.title
+
+
+def test_create_stories(selenium, live_server):
+    create_fred()
+    # Fred opens his Nimble shortcut for stories.
+    selenium.get(live_server.url + '/nimble/')
+    # His browser opens full screen.
+    selenium.set_window_size(1920, 1080)
+    login(selenium, 'fflint', 'wilma')
+    menu = selenium.find_element_by_id('story_menu')
+    menu.click()
+    new_debt_link = selenium.find_element_by_id('create_new_debt')
+    new_debt_link.click()
+    wait_for_firefox(selenium)
+    title = selenium.find_element_by_id('id_title')
+    title.send_keys('Fix broken render pipeline')
+    description = selenium.find_element_by_id('id_description_1')
+    description.send_keys((
+        'Pipeline is broken in\n'
+        '~~~~\n'
+        'def my_function():\n'
+        '    pass\n'
+        '~~~~\n'
+        "Since it doesn't work."
+    ).replace('\n', Keys.RETURN))
+    save = selenium.find_element_by_name('submit')
+    save.click()
+    wait_for_firefox(selenium)
+    heading = selenium.find_element_by_tag_name('h2')
+    heading_text = heading.text.strip()
+    assert re.match(r'Debt D[0-9]{5}$', heading_text)
 
 
 def test_bad_idents(selenium, live_server, mocker):

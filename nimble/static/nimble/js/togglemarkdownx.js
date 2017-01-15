@@ -27,6 +27,6 @@
 
     $(function() {
         $('.markdowntoggle').change_on_toggle();
-        $('.markdowntoggle').showhide()
+        $('.markdowntoggle').showhide();
     });
 })(jQuery);

@@ -79,7 +79,7 @@ setup(
         'djangorestframework',
         'Markdown',
         'django-polymorphic',
-        'django-markdownx',
+        'django-markdownx>=1.7',
     ],
     setup_requires=['pytest-runner>=2.9'],
     tests_require=[

@@ -18,3 +18,11 @@ class Story(PolymorphicModel):
         return reverse(self.api_detail_name, kwargs={
             'pk': self.pk,
         })
+
+    @classmethod
+    def api_keys(cls):
+        return ['url', 'author', 'title', 'description']
+
+    @classmethod
+    def api_list_url(cls):
+        return reverse(cls.api_list_name)

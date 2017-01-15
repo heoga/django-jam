@@ -13,7 +13,7 @@ class FeatureSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Feature
-        fields = ('url', 'author', 'title')
+        fields = Feature.api_keys()
 
     def validate_author(self, value):
         """

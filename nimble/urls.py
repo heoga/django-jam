@@ -8,6 +8,7 @@ from .serializers.profile import ProfileViewSet
 from .serializers.user import UserViewSet
 from .views.control_panel import ControlPanelView
 from .views.dashboard import DashboardView
+from .views.story_create import StoryCreate
 from .views.story_detail import StoryDetail
 from .views.story_list import StoryList
 
@@ -29,5 +30,9 @@ urlpatterns = [
     url(
         r'^(?P<ident>D|F)(?P<pk>[0-9]+)/$', StoryDetail.as_view(),
         name='story_detail'
+    ),
+    url(
+        r'^new/(?P<story_type>debt|feature)/$', StoryCreate.as_view(),
+        name='story_create'
     ),
 ]
