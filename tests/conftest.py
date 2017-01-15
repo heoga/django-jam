@@ -68,6 +68,7 @@ def pytest_configure(config):
             'nimble.apps.NimbleConfig',
             'rest_framework',
             'bootstrap3',
+            'markdownx',
             'tests',
         ),
         PASSWORD_HASHERS=(

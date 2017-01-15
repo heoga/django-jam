@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^control_panel/$', ControlPanelView.as_view(), name='control_panel'),
     url(r'^api/', include(router.urls), name='rootapi'),
     url(r'^api-auth/', include('rest_framework.urls')),
-    url(r'^stories/$', StoryList.as_view()),
+    url(r'^stories/$', StoryList.as_view(), name='stories'),
     url(
         r'^(?P<ident>D|F)(?P<pk>[0-9]+)/$', StoryDetail.as_view(),
         name='story_detail'

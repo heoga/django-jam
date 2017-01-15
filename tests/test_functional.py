@@ -102,8 +102,13 @@ def login(selenium, user, password):
 
 def test_view_stories(selenium, live_server):
     fred = create_fred()
-    debt = Debt.objects.create(author=fred, title='Fix bad code style')
-    feature = Feature.objects.create(author=fred, title='User can pick theme')
+    debt = Debt.objects.create(
+        author=fred, title='Fix bad code style', description="It's horrid"
+    )
+    feature = Feature.objects.create(
+        author=fred, title='User can pick theme',
+        description="Different strokes"
+    )
     # Fred opens his Nimble shortcut for stories.
     selenium.get(live_server.url + '/nimble/stories/')
     # His browser opens full screen.

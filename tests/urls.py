@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^nimble/', include('nimble.urls')),
+    url(r'^markdownx/', include('markdownx.urls')),
 ]
