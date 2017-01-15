@@ -160,7 +160,7 @@ def test_view_stories(selenium, live_server):
 
 
 def test_create_stories(selenium, live_server):
-    create_fred()
+    fred = create_fred()
     # Fred opens his Nimble shortcut for stories.
     selenium.get(live_server.url + '/nimble/')
     # His browser opens full screen.
@@ -188,6 +188,8 @@ def test_create_stories(selenium, live_server):
     heading = selenium.find_element_by_tag_name('h2')
     heading_text = heading.text.strip()
     assert re.match(r'Debt D[0-9]{5}$', heading_text)
+    author = selenium.find_element_by_id('author')
+    assert author.text == fred.get_full_name()
 
 
 def test_bad_idents(selenium, live_server, mocker):
