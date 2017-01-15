@@ -6,8 +6,6 @@ from django.views import View
 from django.views.generic import DetailView, FormView
 from django.views.generic.detail import SingleObjectMixin
 
-import reversion
-
 from nimble.forms.debt import DebtForm
 from nimble.forms.feature import FeatureForm
 from nimble.models.debt import Debt
@@ -49,16 +47,9 @@ class StoryPost(SingleObjectMixin, FormView):
             return HttpResponseForbidden()
         self.object = self.get_object()
         self.form_class = form_mapping[type(self.object)]
-        debt_form = self.form_class(request.POST)
-        if debt_form.is_valid():
-            with reversion.create_revision():
-                for key, value in debt_form.cleaned_data.items():
-                    setattr(self.object, key, value)
-                self.object.save()
-                reversion.set_user(request.user)
-                reversion.set_comment(
-                    "Edited {} through web".format(self.object.typename)
-                )
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            self.object.update(form.cleaned_data)
         return super().post(request, *args, **kwargs)
 
     def get_success_url(self):
