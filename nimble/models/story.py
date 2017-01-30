@@ -6,7 +6,6 @@ import reversion
 from markdownx.models import MarkdownxField
 from polymorphic.models import PolymorphicModel
 
-
 from nimble.utilities.bootstrap_diffs import bootstrap_diffs
 
 
