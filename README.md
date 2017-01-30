@@ -30,10 +30,22 @@ INSTALLED_APPS = (
     'nimble.apps.NimbleConfig',
     'rest_framework',
     'bootstrap3',
+    'markdownx',
+    'reversion',
 )
 ```
 Since nimble overrides the view of rest_framework API it must appear above the
 rest_framework in the list.
+
+## Middleware
+Nimble using django-reversion to track changes to it's objects.  To utilise this
+the django-reversion middleware must be included.
+```
+MIDDLEWARE = [
+    ...
+    'reversion.middleware.RevisionMiddleware',
+]
+```
 
 [build-status-image]: https://secure.travis-ci.org/heoga/django-nimble.svg?branch=master
 [travis]: http://travis-ci.org/heoga/django-nimble?branch=master

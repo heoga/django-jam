@@ -34,6 +34,7 @@ class StoryDisplay(DetailView):
             raise Http404("Object does not exist")
         form = form_mapping[type(story)]
         context['form'] = form(instance=story)
+        context['active_tab'] = 'details'
         return context
 
 
@@ -49,7 +50,7 @@ class StoryPost(SingleObjectMixin, FormView):
         self.form_class = form_mapping[type(self.object)]
         form = self.form_class(request.POST)
         if form.is_valid():
-            self.object.update(form.cleaned_data)
+            self.object.update(request.user, form.cleaned_data)
         return super().post(request, *args, **kwargs)
 
     def get_success_url(self):

@@ -10,6 +10,7 @@ from .views.control_panel import ControlPanelView
 from .views.dashboard import DashboardView
 from .views.story_create import StoryCreate
 from .views.story_detail import StoryDetail
+from .views.story_history import StoryHistory
 from .views.story_list import StoryList
 
 # Routers provide an easy way of automatically determining the URL conf.
@@ -34,5 +35,9 @@ urlpatterns = [
     url(
         r'^new/(?P<story_type>debt|feature)/$', StoryCreate.as_view(),
         name='story_create'
+    ),
+    url(
+        r'^(?P<ident>D|F)(?P<pk>[0-9]+)/history/$', StoryHistory.as_view(),
+        name='story_history'
     ),
 ]

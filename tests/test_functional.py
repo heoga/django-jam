@@ -4,6 +4,9 @@ import time
 
 from django.contrib.auth.models import User
 
+import reversion
+
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 from nimble.forms.feature import FeatureForm
@@ -106,10 +109,12 @@ def test_view_stories(selenium, live_server):
     debt = Debt.objects.create(
         author=fred, title='Fix bad code style', description="It's horrid"
     )
-    feature = Feature.objects.create(
-        author=fred, title='User can pick theme',
-        description="Different strokes"
-    )
+    # Manually hack the creation as we're bypassing the normal create route.
+    with reversion.create_revision():
+        feature = Feature.objects.create(
+            author=fred, title='User can pick theme',
+            description="Different strokes"
+        )
     # Fred opens his Nimble shortcut for stories.
     selenium.get(live_server.url + '/nimble/stories/')
     # His browser opens full screen.
@@ -131,6 +136,8 @@ def test_view_stories(selenium, live_server):
     wait_for_firefox(selenium)
     # He corrects the form.
     title = selenium.find_element_by_name('title')
+    toggle = selenium.find_element(By.XPATH, "//div[@data-toggle='toggle']")
+    toggle.click()
     for i in range(0, 19):
         title.send_keys(Keys.BACKSPACE)
     title.send_keys('User can pick from a list of themes')
@@ -150,7 +157,17 @@ def test_view_stories(selenium, live_server):
     link = rows[1].find_element_by_tag_name('a')
     link.click()
     wait_for_firefox(selenium)
-    # And clicks the API link.
+    # He checks the history for the feature.
+    history_link = selenium.find_element_by_id('history_link')
+    history_link.click()
+    feature = Feature.objects.get(id=feature.id)
+    assert feature.title == 'User can pick from a list of themes'
+    assert len(feature.versions()) == 2
+    wait_for_firefox(selenium)
+    # Fred observes the change from the old title to the new one.
+    assert 'User can pick from a list of themes' in selenium.page_source
+    assert 'User can pick theme' in selenium.page_source
+    # He then clicks the API link.
     api_link = selenium.find_element_by_name('API')
     api_link.click()
     wait_for_firefox(selenium)

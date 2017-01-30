@@ -11,9 +11,11 @@
             markdownxEditor.show();
             markdownxPreview.hide();
             markdownxEditor.innerHeight(markdownxEditor.prop('scrollHeight'));
+            $('button').prop('disabled', false);
         } else {
             markdownxEditor.hide();
             markdownxPreview.show();
+            $('button').prop('disabled', true);
         }
     }
 
