@@ -49,7 +49,7 @@ def pytest_configure(config):
         USE_I18N=True,
         USE_L10N=True,
         STATIC_URL='/static/',
-        ROOT_URLCONF='tests.urls',
+        ROOT_URLCONF='nimble_testconfig.urls',
         TEMPLATES=[
             {
                 'DIRS': [],
@@ -71,7 +71,7 @@ def pytest_configure(config):
             'bootstrap3',
             'markdownx',
             'reversion',
-            'tests',
+            'nimble_testconfig.apps.NimbleTestConfig',
         ),
         PASSWORD_HASHERS=(
             'django.contrib.auth.hashers.MD5PasswordHasher',
