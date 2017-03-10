@@ -15,3 +15,4 @@ def test_imports():
     assert dir(nimble.migrations.m_0003_auto_20161127_0953)
     assert dir(nimble.migrations.m_0004_auto_20161218_1303)
     assert dir(nimble.migrations.m_0005_story_description)
+    assert False
