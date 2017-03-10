@@ -7,7 +7,9 @@ install:
   - pip install -r requirements/testing.txt --upgrade
   - pip freeze
 # command to run tests
-script: python setup.py test
+script:
+    - python setup.py test
+    - pylint nimble
 
 after_success:
     - pip install codecov
