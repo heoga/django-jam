@@ -92,6 +92,7 @@ setup(
         'pytest-isort>=0.1',
         'pytest-selenium>=1.6',
         'pytest-mock',
+        'pytest-pylint>=0.7.0',
         'factory_boy',
     ],
     zip_safe=False,
