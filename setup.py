@@ -60,6 +60,17 @@ def get_package_data(package):
     return {package: filepaths}
 
 
+def install_requirements():
+    with open(os.path.join('requirements', 'install.txt')) as h:
+        requirements = h.read().splitlines()
+    return requirements
+
+
+def testing_requirements():
+    with open(os.path.join('requirements', 'testing.txt')) as h:
+        requirements = h.read().splitlines()
+    return requirements
+
 version = "0.1.0"
 
 setup(
@@ -73,28 +84,9 @@ setup(
     author_email='karlodie@gmail.com',
     packages=get_packages('nimble'),
     package_data=get_package_data('nimble'),
-    install_requires=[
-        'django==1.10.5',
-        'django-bootstrap3==7.1.0',
-        'djangorestframework==3.5.2',
-        'Markdown==2.6.7',
-        'django-polymorphic==1.0.2',
-        'django-markdownx==1.7.2',
-        'django-reversion==2.0.8',
-    ],
+    install_requires=install_requirements(),
     setup_requires=['pytest-runner>=2.9'],
-    tests_require=[
-        'pytest==3.0.6',
-        'pytest-base-url==1.2',
-        'pytest-django==3.1.2',
-        'pytest-cov==2.4',
-        'pytest-flake8==0.8.1',
-        'pytest-isort==0.1',
-        'pytest-selenium==1.7',
-        'pytest-mock',
-        'pytest-pylint==0.7.0',
-        'factory_boy==2.8.1',
-    ],
+    tests_require=testing_requirements(),
     zip_safe=False,
     classifiers=[
         'Environment :: Web Environment',
