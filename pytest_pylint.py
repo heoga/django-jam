@@ -140,11 +140,10 @@ def pytest_collection_finish(session):
     if session.config.option.pylint_pause_tracer:
         tracer = sys.gettrace()
         sys.settrace(None)
-    # result = lint.Run(args_list, reporter=reporter, exit=False)
+    result = lint.Run(args_list, reporter=reporter, exit=False)
     if session.config.option.pylint_pause_tracer:
         sys.settrace(tracer)
-    # messages = result.linter.reporter.data
-    messages = []
+    messages = result.linter.reporter.data
     # Stores the messages in a dictionary for lookup in tests.
     for message in messages:
         if message.path not in session.pylint_messages:
@@ -181,7 +180,6 @@ class PyLintItem(pytest.Item, pytest.File):
 
     def runtest(self):
         """Check the pylint messages to see if any errors were reported."""
-        return
         reported_errors = []
         for error in self.session.pylint_messages.get(self.rel_path, []):
             if error.C in self.config.option.pylint_error_types:
