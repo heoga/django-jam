@@ -1,6 +1,7 @@
 import os
 import sys
 
+pytest_plugins = "pytest_pylint"
 
 def find_phantomjs():
     phantom = os.environ.get('PHANTOMJS')
