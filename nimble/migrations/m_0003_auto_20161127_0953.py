@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('contenttypes', 'm_0002_remove_content_type_name'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('nimble', '0002_profile_theme'),
+        ('nimble', 'm_0002_profile_theme'),
     ]
 
     operations = [
