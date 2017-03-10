@@ -5,6 +5,7 @@ python:
 install:
   - pip install -r requirements/install.txt --upgrade
   - pip install -r requirements/testing.txt --upgrade
+  - pip freeze
 # command to run tests
 script: python setup.py test
 
