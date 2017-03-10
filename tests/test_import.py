@@ -5,6 +5,9 @@ import os
 def test_imports():
     print(sys.path)
     print(os.path.abspath('.'))
+    assert os.path.exists(os.path.join(
+        'nimble', 'migrations', 'm_0001_initial.py'
+    ))
     import nimble.migrations.m_0001_initial
     import nimble.migrations.m_0002_profile_theme
     import nimble.migrations.m_0003_auto_20161127_0953
