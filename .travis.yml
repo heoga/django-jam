@@ -6,7 +6,9 @@ install:
   - pip install -r requirements/install.txt --upgrade
   - pip install -r requirements/testing.txt --upgrade
 # command to run tests
-script: python setup.py test
+script:
+    - python setup.py test
+    - pylint nimble
 
 after_success:
     - pip install codecov
