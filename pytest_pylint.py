@@ -125,6 +125,7 @@ def pytest_collect_file(path, parent):
 
 def pytest_collection_finish(session):
     """Lint collected files and store messages on session."""
+    return
     if not session.pylint_files:
         return
     reporter = ProgrammaticReporter()
