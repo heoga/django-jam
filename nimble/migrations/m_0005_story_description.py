@@ -9,7 +9,7 @@ import markdownx.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('nimble', '0004_auto_20161218_1303'),
+        ('nimble', 'm_0004_auto_20161218_1303'),
     ]
 
     operations = [
