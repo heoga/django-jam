@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 from __future__ import print_function
 from os.path import exists, join, dirname
+import sys
+
 from six.moves.configparser import (  # pylint: disable=import-error
     ConfigParser,
     NoSectionError,
@@ -58,6 +60,12 @@ def pytest_addoption(parser):
         help='The types of pylint errors to consider failures by letter'
         ', default is all of them (CRWEF).'
     )
+    group.addoption(
+        "--pylint-pause-tracer",
+        action="store_true", default=False,
+        help="Pauses tracers (such as coverage) when pylint is runnning."
+        "  This boosts performance."
+    )
 
 
 def pytest_sessionstart(session):
@@ -95,6 +103,26 @@ def pytest_sessionstart(session):
             pass
 
 
+def pytest_collect_file(path, parent):
+    """Collect files on which pylint should run"""
+    config = parent.config
+    if not config.option.pylint:
+        return
+    if path.ext != ".py":
+        return
+    rel_path = path.strpath.replace(parent.fspath.strpath, '', 1)[1:]
+    if parent.pylint_config is None:
+        parent.pylint_files.add(rel_path)
+        # No pylintrc, therefore no ignores, so return the item.
+        return PyLintItem(path, parent)
+
+    if not any(basename in rel_path for basename in parent.pylint_ignore):
+        parent.pylint_files.add(rel_path)
+        return PyLintItem(
+            path, parent, parent.pylint_msg_template, parent.pylintrc_file
+        )
+
+
 def pytest_collection_finish(session):
     """Lint collected files and store messages on session."""
     if not session.pylint_files:
@@ -109,7 +137,12 @@ def pytest_collection_finish(session):
     print('-' * 65)
     print('Linting files')
     # Run pylint over the collected files.
+    if session.config.option.pylint_pause_tracer:
+        tracer = sys.gettrace()
+        sys.settrace(None)
     result = lint.Run(args_list, reporter=reporter, exit=False)
+    if session.config.option.pylint_pause_tracer:
+        sys.settrace(tracer)
     messages = result.linter.reporter.data
     # Stores the messages in a dictionary for lookup in tests.
     for message in messages:
