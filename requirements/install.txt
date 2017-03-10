@@ -3,3 +3,5 @@ django-bootstrap3
 djangorestframework
 Markdown
 django-polymorphic
+django-markdownx>=1.7
+django-reversion
