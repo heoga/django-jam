@@ -25,6 +25,8 @@ def pytest_configure(config):
         lower_case != os.path.abspath(__file__)
     ) and os.path.exists(lower_case):
         sys.path = [a.lower() for a in sys.path]
+    print('System Paths', sys.path)
+    print('Current', os.path.abspath('.'))
     from django.conf import settings
 
     MIDDLEWARE = (
