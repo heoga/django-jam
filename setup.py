@@ -71,6 +71,7 @@ def testing_requirements():
         requirements = h.read().splitlines()
     return requirements
 
+
 version = "0.1.0"
 
 setup(
