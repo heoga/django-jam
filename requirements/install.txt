@@ -1,5 +1,5 @@
 django==1.10.5
 django-bootstrap3==7.1.0
-djangorestframework==3.5.2
+djangorestframework==3.11.2
 Markdown==2.6.7
 django-polymorphic==1.0.2
